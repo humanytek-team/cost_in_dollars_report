@@ -1,0 +1,49 @@
+<odoo>
+<data>
+    <report
+        id="cost_in_dollars_report"
+        model="cost.in.dollars.report"
+        string="Cost in dollars report"
+        name="cost_in_dollars_report.cost_in_dollars_report_view"
+        file="cost_in_dollars_report.cost_in_dollars_report"
+        report_type="qweb-pdf"/>
+
+    <template id="cost_in_dollars_report_view">
+        <t t-call="report.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="report.external_layout">
+                    <div class="page">
+                        <table class="table table-condensed">
+                            <thead>
+                                <tr>
+                                    <th><strong>Product code</strong></th>
+                                    <th><strong>Product description</strong></th>
+                                    <th><strong>Quantity</strong></th>
+                                    <th><strong>Date</strong></th>
+                                    <th><strong>Cost</strong></th>
+                                    <th><strong>Currency</strong></th>
+                                    <!-- <th><strong>Unit cost</strong></th> -->
+                                    <th><strong>Unit cost USD</strong></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="doc.lines" t-as="line">
+                                    <td><span t-field="line.product_default_code"/></td>
+                                    <td><span t-field="line.product_name"/></td>
+                                    <td><span t-field="line.landed_cost_quantity"/></td>
+                                    <td><span t-field="line.landed_cost_date"/></td>
+                                    <td><span t-field="line.landed_cost_former_cost"/></td>
+                                    <td><span t-field="line.inverse_currency_rate"/></td>
+                                    <!-- <td><span t-field="line.unit_cost"/></td> -->
+                                    <td><span t-field="line.unit_cost_usd"/></td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</data>
+</odoo>
