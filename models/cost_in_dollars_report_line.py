@@ -40,9 +40,18 @@ class LineReport(models.TransientModel):
     unit_cost = fields.Float(
         compute='_get_unit_cost',
     )
-    unit_cost_usd = fields.Float(
+    unit_cost_usd = fields.Monetary(
         compute='_get_unit_cost_usd',
+        currency_field='usd_currency'
     )
+    usd_currency = fields.Many2one(
+        comodel_name="res.currency",
+        compute='_get_usd_currency',
+    )
+
+    @api.one
+    def _get_usd_currency(self):
+        self.usd_currency = self.env['res.currency'].search([('name', 'like', '')], limit=1)
 
     @api.one
     @api.depends('landed_cost_date')
