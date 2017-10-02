@@ -1,6 +1,19 @@
 from odoo import api, fields, models
 
 
+class Apportionment(models.TransientModel):
+    _name = 'cost.dlls.report.line.apportionment'
+    line = fields.Many2one(
+        comodel_name='cost.dlls.report.line',
+    )
+    product = fields.Many2one(
+        comodel_name='product.product',
+    )
+    additional_landed_cost = fields.Float(
+        default=0,
+    )
+
+
 class LineReport(models.TransientModel):
     _name = 'cost.dlls.report.line'
 
@@ -27,6 +40,10 @@ class LineReport(models.TransientModel):
     valuation_adjustment_lines = fields.Many2many(
         comodel_name='stock.valuation.adjustment.lines',
     )
+    apportionments = fields.One2many(
+        comodel_name='cost.dlls.report.line.apportionment',
+        inverse_name='line',
+    )
     currency_rate = fields.Many2one(
         comodel_name='res.currency.rate',
         compute='_get_currency_rate'
@@ -36,22 +53,16 @@ class LineReport(models.TransientModel):
     )
     total_cost = fields.Float(
         compute='_get_total_cost',
+        digits=(9, 2),
     )
     unit_cost = fields.Float(
         compute='_get_unit_cost',
+        digits=(9, 2),
     )
-    unit_cost_usd = fields.Monetary(
+    unit_cost_usd = fields.Float(
         compute='_get_unit_cost_usd',
-        currency_field='usd_currency'
+        digits=(9, 2),
     )
-    usd_currency = fields.Many2one(
-        comodel_name="res.currency",
-        compute='_get_usd_currency',
-    )
-
-    @api.one
-    def _get_usd_currency(self):
-        self.usd_currency = self.env['res.currency'].search([('name', 'like', '')], limit=1)
 
     @api.one
     @api.depends('landed_cost_date')

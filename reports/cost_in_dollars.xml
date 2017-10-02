@@ -21,8 +21,12 @@
                                     <th><strong>Quantity</strong></th>
                                     <th><strong>Date</strong></th>
                                     <th><strong>Cost</strong></th>
-                                    <th><strong>Currency</strong></th>
-                                    <!-- <th><strong>Unit cost</strong></th> -->
+                                    <th t-foreach="doc.apportionments" t-as="apportionment">
+                                        <strong t-field="apportionment.name"/>
+                                    </th>
+                                    <th><strong>Currency exchange</strong></th>
+                                    <th><strong>Total cost</strong></th>
+                                    <th><strong>Unit cost</strong></th>
                                     <th><strong>Unit cost USD</strong></th>
                                 </tr>
                             </thead>
@@ -33,11 +37,14 @@
                                     <td><span t-field="line.landed_cost_quantity"/></td>
                                     <td><span t-field="line.landed_cost_date"/></td>
                                     <td><span t-field="line.landed_cost_former_cost"/></td>
+                                    <td t-foreach="line.apportionments" t-as="apportionment">
+                                        <span t-field="apportionment.name"/>
+                                    </td>
                                     <td><span t-field="line.inverse_currency_rate"/></td>
-                                    <!-- <td><span t-field="line.unit_cost"/></td> -->
+                                    <td><span t-field="line.total_cost"/></td>
+                                    <td><span t-field="line.unit_cost"/></td>
                                     <td><span t-field="line.unit_cost_usd"/></td>
                                 </tr>
-
                             </tbody>
                         </table>
                     </div>
