@@ -3,11 +3,12 @@ from odoo import api, fields, models
 
 class Apportionment(models.TransientModel):
     _name = 'cost.dlls.report.line.apportionment'
+
     line = fields.Many2one(
         comodel_name='cost.dlls.report.line',
     )
     product = fields.Many2one(
-        comodel_name='product.product',
+        comodel_name='product.product'
     )
     additional_landed_cost = fields.Float(
         default=0,
@@ -17,6 +18,10 @@ class Apportionment(models.TransientModel):
 class LineReport(models.TransientModel):
     _name = 'cost.dlls.report.line'
 
+    apportionments = fields.One2many(
+        comodel_name='cost.dlls.report.line.apportionment',
+        inverse_name='line',
+    )
     report = fields.Many2one(
         comodel_name='cost.in.dollars.report',
     )
@@ -39,10 +44,6 @@ class LineReport(models.TransientModel):
     )
     valuation_adjustment_lines = fields.Many2many(
         comodel_name='stock.valuation.adjustment.lines',
-    )
-    apportionments = fields.One2many(
-        comodel_name='cost.dlls.report.line.apportionment',
-        inverse_name='line',
     )
     currency_rate = fields.Many2one(
         comodel_name='res.currency.rate',
