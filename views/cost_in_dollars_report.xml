@@ -5,14 +5,12 @@
             <field name="name">Cost in Dollars Report</field>
             <field name="model">cost.in.dollars.report</field>
             <field name="arch" type="xml">
-                <form string="Cost in Dollars Report">
-                    <!-- <field name="landed_costs"/>
-                    <field name="products"/> -->
-                    <!-- <field name='lines'/> -->
-                    <footer>
+                <form string="Cost in Dollars Report" editable='0'>
+                    <sheet>
+                        <b>Advertencia:</b>
+                        Este reporte puede demorar bastante tiempo en generar.
                         <button name="create_report" string="Create Report" type="object" class="btn-primary"/>
-                        <button string="Cancel" class="btn-default" special="cancel" />
-                    </footer>
+                    </sheet>
                 </form>
             </field>
         </record>
@@ -26,12 +24,37 @@
         </record>
 
         <record id="zxc_action_form" model="ir.actions.act_window">
-            <field name="name">ZXC</field>
+            <field name="name">Generar reporte Costos</field>
             <field name="res_model">cost.in.dollars.report</field>
             <field name="view_mode">tree,form</field>
         </record>
 
-        <menuitem action="action_cost_in_dollars_create_report" id="menu_stock_cost_in_dollars_report" parent="stock.menu_stock_sched" sequence="1"/>
+        <record id="qwe_action_form" model="ir.actions.act_window">
+            <field name="name">Ver lineas Costos</field>
+            <field name="res_model">cost.dlls.report.line</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- <menuitem action="action_cost_in_dollars_create_report" id="menu_stock_cost_in_dollars_report" parent="stock.menu_stock_sched" sequence="1"/> -->
         <menuitem action="zxc_action_form" id="zxc2" parent="stock.menu_stock_sched" sequence="1"/>
+        <menuitem action="qwe_action_form" id="qwe" parent="stock.menu_stock_sched" sequence="1"/>
+
+        <record id="qwe_view_tree" model="ir.ui.view">
+            <field name="name">qwe.tree</field>
+            <field name="model">cost.dlls.report.line</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="product_default_code"/>
+                    <field name="product_name"/>
+                    <field name="landed_cost_quantity"/>
+                    <field name="landed_cost_date"/>
+                    <field name="landed_cost_former_cost"/>
+                    <field name="inverse_currency_rate"/>
+                    <field name="total_cost"/>
+                    <field name="unit_cost"/>
+                    <field name="unit_cost_usd"/>
+                </tree>
+            </field>
+        </record>
     </data>
 </odoo>
