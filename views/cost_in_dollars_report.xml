@@ -36,8 +36,8 @@
         </record>
 
         <!-- <menuitem action="action_cost_in_dollars_create_report" id="menu_stock_cost_in_dollars_report" parent="stock.menu_stock_sched" sequence="1"/> -->
-        <menuitem action="zxc_action_form" id="zxc2" parent="stock.menu_stock_sched" sequence="1"/>
-        <menuitem action="qwe_action_form" id="qwe" parent="stock.menu_stock_sched" sequence="1"/>
+        <menuitem action="zxc_action_form" id="zxc2" parent="stock.menu_warehouse_report" sequence="1"/>
+        <menuitem action="qwe_action_form" id="qwe" parent="stock.menu_warehouse_report" sequence="1"/>
 
         <record id="qwe_view_tree" model="ir.ui.view">
             <field name="name">qwe.tree</field>
