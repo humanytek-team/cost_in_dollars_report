@@ -20,13 +20,14 @@
 
 {
     'name': 'Cost in Dollars Report',
-    'version': '1.1',
+    'version': '1.2',
     'author': 'Humanytek',
     'website': 'http://humanytek.com',
     'depends': [
         'stock_landed_costs',
         'procurement',
         'report',
+        'purchase',
     ],
     'data': [
         'security/ir.model.access.csv',
