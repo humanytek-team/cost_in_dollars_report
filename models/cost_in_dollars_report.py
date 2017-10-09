@@ -12,7 +12,7 @@ class CostinDollarsReport(models.TransientModel):
         comodel_name='product.product'
     )
     name = fields.Datetime(
-        default=fields.Datetime.now(),
+        default=fields.Datetime.now,
     )
 
     @api.one
