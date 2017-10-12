@@ -1,7 +1,7 @@
 from odoo import api, fields, models
 
 
-class CostinDollarsReport(models.TransientModel):
+class CostinDollarsReport(models.Model):
     _name = 'cost.in.dollars.report'
 
     lines = fields.One2many(
@@ -44,13 +44,12 @@ class CostinDollarsReport(models.TransientModel):
                             'product': valuation_adjustment_line.cost_line_id.product_id.id,
                             'additional_landed_cost': valuation_adjustment_line.additional_landed_cost,
                         }).line = line
-        # return self.print_report()
-        # for apportionment in self.apportionments:
-        #     for line in self.lines:
-        #         if apportionment not in [a.product for a in line.apportionments]:
-        #             self.env['cost.dlls.report.line.apportionment'].create({
-        #                 'product': apportionment.id,
-        #             }).line = line
-        # self.apportionments = self.apportionments.sorted(key=lambda r: r.name)
-        # for line in self.lines:
-        #     line.apportionments = line.apportionments.sorted(key=lambda r: r.product.name)
+        for apportionment in self.apportionments:
+            for line in self.lines:
+                if apportionment not in [a.product for a in line.apportionments]:
+                    self.env['cost.dlls.report.line.apportionment'].create({
+                        'product': apportionment.id,
+                    }).line = line
+        self.apportionments = self.apportionments.sorted(key=lambda r: r.name)
+        for line in self.lines:
+            line.apportionments = line.apportionments.sorted(key=lambda r: r.product.name)
