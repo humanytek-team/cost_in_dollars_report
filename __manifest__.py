@@ -20,7 +20,7 @@
 
 {
     'name': 'Cost in Dollars Report',
-    'version': '1.2',
+    'version': '1.3',
     'author': 'Humanytek',
     'website': 'http://humanytek.com',
     'depends': [
