@@ -37,12 +37,12 @@
                                     <td><span t-field="line.landed_cost_quantity"/></td>
                                     <td><span t-field="line.landed_cost_date"/></td>
                                     <td><span t-field="line.landed_cost_former_cost"/></td>
-                                    <!-- <td t-foreach="line.valuation_adjustment_lines" t-as="apportionment">
-                                        <span t-field="apportionment.cost_line_id.cost_id.name"/>
-                                    </td> -->
-                                    <td t-foreach="line.report.apportionments" t-as="apportionment">
-                                        <span>TODO</span>
+                                    <td t-foreach="line.valuation_adjustment_lines" t-as="apportionment">
+                                        <span t-field="apportionment.additional_landed_cost"/>
                                     </td>
+                                    <!-- <td t-foreach="line.report.apportionments" t-as="apportionment">
+                                        <span>TODO</span>
+                                    </td> -->
                                     <td><span t-field="line.inverse_currency_rate"/></td>
                                     <td><span t-field="line.total_cost"/></td>
                                     <td><span t-field="line.unit_cost"/></td>

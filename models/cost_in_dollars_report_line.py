@@ -1,7 +1,7 @@
 from odoo import api, fields, models
 
 
-class Apportionment(models.TransientModel):
+class Apportionment(models.Model):
     _name = 'cost.dlls.report.line.apportionment'
 
     line = fields.Many2one(

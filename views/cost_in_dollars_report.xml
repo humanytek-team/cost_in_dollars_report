@@ -39,6 +39,25 @@
         <menuitem action="zxc_action_form" id="zxc2" parent="purchase.menu_purchase_root" sequence="97"/>
         <menuitem action="qwe_action_form" id="qwe" parent="purchase.menu_purchase_root" sequence="98"/>
 
+		<record id="cost_usd_line_view_form" model="ir.ui.view">
+			<field name="name">cost.usd.line.view.form</field>
+			<field name="model">cost.dlls.report.line</field>
+			<field name="arch" type="xml">
+				<form>
+					<sheet>
+						<group>
+							<field name="valuation_adjustment_lines">
+								<tree>
+									<field name="name"/>
+									<field name="additional_landed_cost"/>
+								</tree>
+							</field>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
         <record id="qwe_view_tree" model="ir.ui.view">
             <field name="name">qwe.tree</field>
             <field name="model">cost.dlls.report.line</field>
