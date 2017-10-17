@@ -15,7 +15,7 @@ class Apportionment(models.Model):
     )
 
 
-class LineReport(models.TransientModel):
+class LineReport(models.Model):
     _name = 'cost.dlls.report.line'
 
     apportionments = fields.One2many(
